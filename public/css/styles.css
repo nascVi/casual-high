@@ -1,0 +1,51 @@
+/*style for index.html*/
+
+.chtitle {
+margin-top: 40px;
+margin-left: 40px;
+}
+.chspace {
+padding-top: 20px;
+margin-left: 40px;
+margin-right: 40px;
+margin-top: 40px;
+min-height: 1200px;
+}
+
+.chspace input {
+padding: 10px;
+border: 2px solid #563d7c;
+}
+.chspace h4 {
+margin-bottom: 20px;
+padding: 18px;
+border: 2px solid #563d7c;
+}
+#chcreds {
+margin-bottom: 40px;
+}
+
+.new-chpost {
+margin-bottom: 20px;
+padding: 18px;
+border: 2px solid #563d7c;
+width: 100%;
+}
+
+.new-chpost input{
+    border: transparent;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    }
+
+footer {
+    height: 90px;
+    background-color: #3C3C3C;
+}
+
+footer span {
+    margin-left: 40px;
+    color: #f4F4F4;
+    text-align: center;
+}

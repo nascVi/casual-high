@@ -1,0 +1,27 @@
+<div class="row chspace">
+      <div id="chcreds" class="col-md-4">
+          <h3>login:</h3>
+          <input type="text" size="30" placeholder="User">
+          <br><br>
+          <input type="password" size="30" placeholder="Pass">
+          <a href="#!/inneract"><br></br>
+          <span class="glyphicon glyphicon-registration-mark" aria-hidden="true"></span> inner acts
+          </a>
+      </div>
+      <div class="col-md-8">
+          <div class="new-chpost">
+            <input type="text" class="form-control" ng-model="newchpost" placeholder="Vos lignes...">
+            <button class="btn" type="button" ng-click="sendchpost()">Fixer</button>
+          </div>
+          <h4 ng-repeat = "chpost in chposts">
+            <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+              {{ chpost.text }}
+                <a href ng-click="emponchpost(chpost)">
+                   <br>
+                    <span class="glyphicon glyphicon-floppy-saved"
+                    aria-hidden="true">ch-favoris
+                    </span>
+                </a>
+          </h4>
+      </div>
+</div>

@@ -1,0 +1,74 @@
+<html ng-app="chBlog">
+
+<head>
+  <title>Casual-high</title>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="angular-route.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('chBlog', ['ngRoute']);
+
+    app.config(function($routeProvider, $locationProvider){
+        $routeProvider
+        .when('/', {
+            templateUrl: 'home.html',
+            controller: 'HomeController',
+        })
+        .when('/inneract', {
+            templateUrl: 'inneract.html',
+            controller: 'InneractController',
+        });
+    });
+
+    app.controller('HomeController', function($scope, $http) {
+
+        $scope.sendchpost = function() {
+            $http.post('/chposts', {newchpost: $scope.newchpost}).then(function() {
+                getchposts();
+                $scope.newchpost = '';
+            });
+        };
+
+        $scope.emponchpost = function(thischpost) { /* Studying here a way for the bloggers to emphacise on publications with a first idea of a deprecated button*/
+            $http.put('/chposts/remove', {chpost: thischpost}).then(function() {
+                getchposts();
+            });
+        };
+
+        function getchposts(){
+            $http.get('/chposts').then(function(response) {
+
+                $scope.chposts = response.data;
+            });
+        }
+
+        getchposts();
+
+  });
+
+  app.controller('InneractController', function($scope, $http) {
+
+     $scope.subInneract = function() {
+          var newChUser = {
+            chusr: $scope.chusr,
+            chpsswd: $scope.chpsswd
+        };
+        $http.post('/chusers', newChUser).then(function() {
+            alert('success');
+        });
+     }
+  });
+
+  </script>
+</head>
+
+<body>
+
+  <h1 class="chtitle">Casual High</h1>
+  <div ng-view></div>
+
+</body>
+
+<footer><br><span>&#169;casual-high. A landscapersParis webApp</span></footer>
+</html>
