@@ -6,8 +6,11 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <script type="text/javascript" src="angular.min.js"></script>
   <script type="text/javascript" src="angular-route.js"></script>
+  <script type="text/javascript" src="angular-cookies.js"></script>  
   <script type="text/javascript">
-    var app = angular.module('chBlog', ['ngRoute']);
+    var app = angular.module('chBlog', ['ngRoute', 'ngCookies']);
+
+
 
     app.config(function($routeProvider, $locationProvider){
         $routeProvider
@@ -21,7 +24,14 @@
         });
     });
 
-    app.controller('HomeController', function($scope, $http) {
+    app.run(function($rootScope, $cookies) {
+        if ($cookies.get('token') && $cookies.get('cureChUsr')) {
+            $rootScope.token = $cookies.get('token');
+            $rootScope.cureChUsr = $cookies.get('cureChUsr');
+        }
+    });
+
+    app.controller('HomeController', function($rootScope, $scope, $http, $cookies) {
 
         $scope.sendchpost = function() {
             $http.post('/chposts', {newchpost: $scope.newchpost}).then(function() {
@@ -33,8 +43,23 @@
         $scope.emponchpost = function(thischpost) { /* Studying here a way for the bloggers to emphacise on publications with a first idea of a deprecated button*/
             $http.put('/chposts/remove', {chpost: thischpost}).then(function() {
                 getchposts();
+
             });
         };
+
+        $scope.chin = function() {
+            $http.put('/chusers/chin', {chusr: $scope.chusr, chpsswd: $scope.chpsswd})
+                .then(function(res) {
+                console.log(res.data.token);
+                $cookies.put('token', res.data.token);
+                $cookies.put('cureChUsr', $scope.chusr);
+                $rootScope.token = res.data.token;
+                $rootScope.cureChUsr = $scope.chusr;  // User will see his name asa1 signin
+                alert('You now enter you\'re own very spot');
+            }, function(err) {
+                alert('Back to a right credents attempt, if yuh don\' mind');
+            });
+        }
 
         function getchposts(){
             $http.get('/chposts').then(function(response) {
@@ -65,7 +90,7 @@
 
 <body>
 
-  <h1 class="chtitle">Casual High</h1>
+  <h1 class="chtitle"><a href="#!/">Casual-High</a></h1>
   <div ng-view></div>
 
 </body>

@@ -1,12 +1,24 @@
 <div class="row chspace">
       <div id="chcreds" class="col-md-4">
-          <h3>login:</h3>
-          <input type="text" size="30" placeholder="User">
-          <br><br>
-          <input type="password" size="30" placeholder="Pass">
-          <a href="#!/inneract"><br></br>
-          <span class="glyphicon glyphicon-registration-mark" aria-hidden="true"></span> inner acts
-          </a>
+         <div ng-hide ="cureChUsr">
+            <h3>login:</h3>
+            <input type="text" size="30" placeholder="User" ng-model="chusr">
+            <br><br>
+            <input type="password" size="30" placeholder="Pass" ng-model="chpsswd">
+            <br><br>
+            <button type="button" data-ng-click="chin()">casual-in</button>
+            <span>  | </span>
+            <a href="#!/inneract">
+            <span class="glyphicon glyphicon-registration-mark" aria-hidden="true"></span> inner acts
+            </a>
+            <br>
+         </div>
+         <div ng-show ="cureChUsr">
+            <hr>
+            <h5 style="color: burlywood;">Welcome to the Jungle CaZ'{{cureChUsr}}.</h5>
+            <br>
+         </div>
+         
       </div>
       <div class="col-md-8">
           <div class="new-chpost">
