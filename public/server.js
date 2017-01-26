@@ -34,9 +34,14 @@ app.get('/chposts', function(req, res, next) {
 
 app.post('/chposts', function(req, res, next) {
 
+    var token = req.headers.authorization;
+    var usr = jwt.decode(token, JWT_SECRET);
+
     db.collection('chposts', function(err, chpostsCollection) {
         var newchpost = {
-           text: req.body.newchpost
+           text: req.body.newchpost,
+           usr: usr._id,
+           chusr: usr.chusr
         };
 
         chpostsCollection.insert(newchpost, {w:1}, function(err){
@@ -48,12 +53,13 @@ app.post('/chposts', function(req, res, next) {
 
 app.put('/chposts/remove', function(req, res, next) { /*remove app*/
 
+    var token = req.headers.authorization;
+    var usr = jwt.decode(token, JWT_SECRET);
+
     db.collection('chposts', function(err, chpostsCollection) {
         var chPId = req.body.chpost._id;
-
-          chpostsCollection.remove({_id: ObjectId(chPId)}, {w:1}, function(err){
-              return res.send();
-
+        chpostsCollection.remove({_id: ObjectId(chPId), usr: usr._id}, {w:1}, function(err, result){
+            return res.send();
         });
     });
 

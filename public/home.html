@@ -1,4 +1,5 @@
 <div class="row chspace">
+
       <div id="chcreds" class="col-md-4">
          <div ng-hide ="cureChUsr">
             <h3>login:</h3>
@@ -17,11 +18,15 @@
             <hr>
             <h5 style="color: burlywood;">Welcome to the Jungle CaZ'{{cureChUsr}}.</h5>
             <br>
-         </div>
-         
+            <a href ng-click="chout()">
+              <span class="glyphicon glyphicon-road" aria-hidden="true"></span> Outty heels
+            </a>
+            <!-- inspired shiffty logout - P!NK: Blow me out a kiss-->
+         </div>        
       </div>
+
       <div class="col-md-8">
-          <div class="new-chpost">
+          <div class="new-chpost" ng-show="cureChUsr">
             <input type="text" class="form-control" ng-model="newchpost" placeholder="Vos lignes...">
             <button class="btn" type="button" ng-click="sendchpost()">Fixer</button>
           </div>
@@ -34,6 +39,10 @@
                     aria-hidden="true">ch-favoris
                     </span>
                 </a>
+                <br>
+                <br>
+                <small>{{ chpost.chusr }}</small>
           </h4>
       </div>
+
 </div>

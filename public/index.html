@@ -34,16 +34,23 @@
     app.controller('HomeController', function($rootScope, $scope, $http, $cookies) {
 
         $scope.sendchpost = function() {
-            $http.post('/chposts', {newchpost: $scope.newchpost}).then(function() {
-                getchposts();
-                $scope.newchpost = '';
+            $http.post('/chposts', 
+                {newchpost: $scope.newchpost},
+                {headers: {
+                    'authorization': $rootScope.token
+                }}).then(function() {
+                    getchposts();
+                    $scope.newchpost = '';
             });
         };
 
         $scope.emponchpost = function(thischpost) { /* Studying here a way for the bloggers to emphacise on publications with a first idea of a deprecated button*/
-            $http.put('/chposts/remove', {chpost: thischpost}).then(function() {
+            $http.put('/chposts/remove', 
+                {chpost: thischpost},
+                {headers: {
+                    'authorization': $rootScope.token
+                }}).then(function() {
                 getchposts();
-
             });
         };
 
@@ -59,7 +66,14 @@
             }, function(err) {
                 alert('Back to a right credents attempt, if yuh don\' mind');
             });
-        }
+        };
+
+        $scope.chout = function() {
+                $cookies.remove('token');
+                $cookies.remove('cureChUsr');
+                $rootScope.token = null;
+                $rootScope.cureChUsr = null;
+        };
 
         function getchposts(){
             $http.get('/chposts').then(function(response) {
