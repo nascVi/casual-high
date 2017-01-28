@@ -9,7 +9,8 @@ var app = express();
 var JWT_SECRET = 'casualCat';
 
 var db = null;
-MongoClient.connect("mongodb://localhost:27017/ch-blog", function(err, dbconn){
+
+MongoClient.connect(process.env.MONGOLAB_URI || "mongodb://localhost:27017/ch-blog", function(err, dbconn){
     if(!err) {
         console.log('connection to ch-blog!');
         db = dbconn;
@@ -110,6 +111,6 @@ app.put('/chusers/chin', function(req, res, next) { /* SIGN IN app */
 
 
 /*web server services launch*/
-app.listen(80, function(){
+app.listen(process.env.PORT || 80, function(){
     console.log('casual-high running');
 });
