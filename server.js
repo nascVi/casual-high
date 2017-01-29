@@ -20,7 +20,7 @@ MongoClient.connect(process.env.MONGOLAB_URI || "mongodb://localhost:27017/ch-bl
 app.use(bodyParser.json());
 
 /*pointing at the right DIR*/
-app.use(express.static('../public'));
+app.use(express.static('public'));
 
 /*api function*/
 app.get('/chposts', function(req, res, next) {

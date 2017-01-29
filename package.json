@@ -2,7 +2,7 @@
   "name": "casual-high",
   "version": "1.0.0",
   "description": "fashion blog",
-  "main": "/public/server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
