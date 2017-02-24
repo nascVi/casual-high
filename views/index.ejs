@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>Casual-High|Admin</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+</head>
+<h1>Casual-High|Editors side</h1>
+<h3>Add Parts</h3>
+<form method="post" action="/part/add">
+    <input type="text" name="name" placeholder="Add Name">
+    <input type="text" name="email" placeholder="Add Email">
+    <input type="submit" value="Submit">
+</form>
+
+<h3>Casual-Parts</h3>
+<ul>
+<% parts.forEach(function(part){ %>
+    <li>
+        <h4><% part.value.name %></h4>
+        <%= part.value.email %>
+        <form method="post" action="/part/delete/<%= part.key %>">
+        <input type="hidden" value="<%= part.value.rev %>" name="rev">
+        <input type="submit" value="X">
+        </form>
+    </li>
+<% }); %>
+</ul>
+</html>
