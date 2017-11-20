@@ -1,2 +1,2 @@
-# casual-high[https://casual-high.heroku.com]
+# [casual-high](http://casual-high.herokuapp.com)
 blog de mode - Projet
